@@ -16,7 +16,6 @@ int languageChoice()
     {
         cout << "Pleaser enter what language you are using: " << endl;
         cout << "1- C++" << endl;
-
         cin >> choice;
     }
     return choice;
@@ -25,7 +24,7 @@ int languageChoice()
 void testDir()
 {
     vector<string> testExtentions = {".h", ".cpp"};
-    Directory dir(testExtentions);
+    Directory dir("../NetworkTool", testExtentions);
 
     for(auto file: dir.getFiles())
         cout << file.first << " located in : " << file.second << endl;

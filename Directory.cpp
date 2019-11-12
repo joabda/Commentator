@@ -1,8 +1,9 @@
 #include "Directory.h"
 
-Directory::Directory(const vector<string>& extensions)
+Directory::Directory(const string& source, const vector<string>& extensions)
 {
-    directories_ = {"./"};
+    source_ = source;
+    directories_ = {source_};
     extensions_ = extensions;
     for(int index = 0; index < directories_.size(); ++index)
         findFilesInsideDirectory(directories_[index]);
