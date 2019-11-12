@@ -9,7 +9,8 @@ class Parse
 public:
     Parse();
     void setFile(const string& fileName);
-    virtual ~Parse();
+    virtual vector<string> getExtensions() const { return {}; }
+    virtual ~Parse() {}
 
 protected:
     vector<string> exceptions_;
@@ -18,7 +19,7 @@ protected:
     string return_;
     string fileName_;
 
-    virtual void goToNextFunction();
+    virtual void goToNextFunction() {}
     string getFunctionDocumentation();
     void addParameter(const string& parameter);
     void addException(const string& exception);

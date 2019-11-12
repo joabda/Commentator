@@ -21,18 +21,28 @@ int languageChoice()
     return choice;
 }
 
-void testDir()
+bool verifyPath(string userInput)
 {
-    vector<string> testExtentions = {".h", ".cpp"};
-    Directory dir("../NetworkTool", testExtentions);
+    if(userInput[0] == '\'')
+        cout << Directory::validatePath(userInput);
+    return false;
+}
 
-    for(auto file: dir.getFiles())
-        cout << file.first << " located in : " << file.second << endl;
+string getSourcePath()
+{
+    string userInput = "";
+    while(verifyPath(userInput))
+    {
+        cout << "Enter your project's path" << endl;
+        getline(cin, userInput);
+    }
+    return userInput;
 }
 
 int main(int argc, char *argv[])
 {
-    testDir();
+    getSourcePath();
+
     int language = languageChoice();
     Header headerSettings;
 
@@ -46,6 +56,8 @@ int main(int argc, char *argv[])
             parser = ParseJava();
             break;
     }
+    Directory projectDir(getSourcePath(), parser.getExtensions());
+
 
     return 0;
 }

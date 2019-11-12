@@ -10,14 +10,10 @@ void Parse::setFile(const string& fileName)
     fileName_ = fileName;
 }
 
-void Parse::goToNextFunction() 
-{
-
-}
-
 string Parse::getFunctionDocumentation()
 {
 
+    return "";
 }
 
 void Parse::addParameter(const string& parameter)
@@ -36,11 +32,6 @@ void Parse::addTemplateParameter(const string& templateParameter)
 }
 
 void Parse::setReturn(const string& functionReturn)
-{
-
-}
-
-Parse::~Parse() 
 {
 
 }

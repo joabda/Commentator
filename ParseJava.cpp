@@ -10,7 +10,7 @@ void ParseJava::goToNextFunction()
     
 }
 
-ParseJava::~ParseJava()
+vector<string> ParseJava::getExtensions() const
 {
-    
+    return {".java"};
 }

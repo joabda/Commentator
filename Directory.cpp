@@ -5,7 +5,7 @@ Directory::Directory(const string& source, const vector<string>& extensions)
     source_ = source;
     directories_ = {source_};
     extensions_ = extensions;
-    for(int index = 0; index < directories_.size(); ++index)
+    for(unsigned index = 0; index < directories_.size(); ++index)
         findFilesInsideDirectory(directories_[index]);
 }
 
@@ -23,7 +23,7 @@ void Directory::findFilesInsideDirectory(const fs::path& currentPath)
 string Directory::extractName(string path) const
 {
     int lastPosition = 0;
-    int position = path.find('/');
+    unsigned position = path.find('/');
     while(position != string::npos)
     {
         lastPosition = position;
@@ -44,4 +44,10 @@ bool Directory::validateExtension(const fs::path& currentEntry) const
 map<string, string> Directory::getFiles() const
 {
     return files_;
+}
+
+bool Directory::validatePath(const string& path)
+{
+    fs::directory_entry toValidate(path);
+    return toValidate.exists();
 }

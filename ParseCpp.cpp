@@ -10,12 +10,7 @@ void ParseCpp::goToNextFunction()
     
 }
 
-vector<string> getExtensions()
+vector<string> ParseCpp::getExtensions() const
 {
     return {".cpp", ".h", ".hpp"};
-}
-
-ParseCpp::~ParseCpp()
-{
-    
 }

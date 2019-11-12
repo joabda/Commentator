@@ -13,6 +13,7 @@ class Directory
 public: 
     Directory(const string& source, const vector<string>& extensions);
     map<string, string> getFiles() const;
+    static bool validatePath(const string& paths);
 
 private:
     string source_;

@@ -10,7 +10,7 @@ class ParseCpp : public Parse
 public:
     ParseCpp();
     void goToNextFunction() override;
-    vector<string> getExtensions() const;
+    vector<string> getExtensions() const override;
 
-    ~ParseCpp();
+    ~ParseCpp() {}
 };

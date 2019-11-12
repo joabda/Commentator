@@ -9,6 +9,7 @@ class ParseJava : public Parse
 public:
     ParseJava();
     void goToNextFunction() override;
+    vector<string> getExtensions() const override;
 
-    ~ParseJava();
+    ~ParseJava() {}
 };
