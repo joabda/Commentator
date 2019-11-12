@@ -1,11 +1,16 @@
 #include "ParseJava.h"
 
-ParseJava::ParseJava(const string& fileName)
+ParseJava::ParseJava()
 {
 
 }
 
 void ParseJava::goToNextFunction()
+{
+    
+}
+
+ParseJava::~ParseJava()
 {
     
 }

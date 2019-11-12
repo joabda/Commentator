@@ -5,23 +5,34 @@
 ##################################################
 
 EXEC = Commentator
-CXXFLAGS = -Wall 
+CXXFLAGS = --std=c++17 -lstdc++fs -O0 -Wall 
 DEBUG = no
-CC= g++
+CC= g++-8
 
 .PHONY: all clean debug-memory debuging
 
 all: $(EXEC)
 
-$(EXEC): main.o Header.o
-	$(CC) -o $@ $^ -L/usr/lib -lsqlite3
+$(EXEC): main.o Header.o Parse.o ParseCpp.o ParseJava.o Directory.o
+	$(CC) -o $@ $^ $(CXXFLAGS)
 
-main.o: main.cpp Settings.h
+main.o: main.cpp Header.h Parse.h ParseCpp.h ParseJava.h Directory.h
 	$(CC) $(CXXFLAGS) -o $@ -c $< 
 
 Header.o: Header.cpp Header.h
 	$(CC) $(CXXFLAGS) -o $@ -c $<
 
+Parse.o: Parse.cpp Parse.h
+	$(CC) $(CXXFLAGS) -o $@ -c $<
+
+ParceCpp.o: ParceCpp.cpp ParceCpp.h Parce.h
+	$(CC) $(CXXFLAGS) -o $@ -c $<
+
+ParceJava.o: ParceJava.cpp ParceJava.h Parce.h
+	$(CC) $(CXXFLAGS) -o $@ -c $<
+
+Directory.o: Directory.cpp Directory.h
+	$(CC) $(CXXFLAGS) -o $@ -c $<
 #Network.o: Network.cpp Network.h Host.h Algorithm.h DataBase.h Compare.h LinuxNotification.h
 #	$(CC) $(CXXFLAGS) -o $@ -c $<
 

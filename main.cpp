@@ -1,6 +1,12 @@
 #include <iostream>
-#include "Header.h"
+#include <string>
+#include <vector>
 
+#include "Header.h"
+#include "Parse.h"
+#include "ParseCpp.h"
+#include "ParseJava.h"   
+#include "Directory.h"
 using namespace std;
 
 int languageChoice()
@@ -16,20 +22,29 @@ int languageChoice()
     return choice;
 }
 
+void testDir()
+{
+    vector<string> testExtentions = {".h", ".cpp"};
+    Directory dir(testExtentions);
+
+    for(auto file: dir.getFiles())
+        cout << file.first << " located in : " << file.second << endl;
+}
 
 int main(int argc, char *argv[])
 {
+    testDir();
     int language = languageChoice();
     Header headerSettings;
 
-    Parse parser;
+    Parse parser = Parse();
     switch(language)
     {
         case 1: 
-            parser = ParseCpp;
+            parser = ParseCpp();
             break;
         case 2: 
-            parser = ParseJava;
+            parser = ParseJava();
             break;
     }
 

@@ -1,11 +1,21 @@
 #include "ParseCpp.h"
 
-ParseCpp::ParseCpp(const string& fileName)
+ParseCpp::ParseCpp()
 {
 
 }
 
 void ParseCpp::goToNextFunction()
+{
+    
+}
+
+vector<string> getExtensions()
+{
+    return {".cpp", ".h", ".hpp"};
+}
+
+ParseCpp::~ParseCpp()
 {
     
 }

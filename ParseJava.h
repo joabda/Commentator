@@ -7,6 +7,8 @@ using namespace std;
 class ParseJava : public Parse
 {
 public:
-    ParseJava(const string& fileName);
-    void goToNextFunction();
+    ParseJava();
+    void goToNextFunction() override;
+
+    ~ParseJava();
 };

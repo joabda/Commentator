@@ -1,7 +1,16 @@
 #include "Parse.h"
 
+Parse::Parse()
+{
 
-Parse::Parse(const string& fileName)
+}
+
+void Parse::setFile(const string& fileName)
+{
+    fileName_ = fileName;
+}
+
+void Parse::goToNextFunction() 
 {
 
 }
@@ -27,6 +36,11 @@ void Parse::addTemplateParameter(const string& templateParameter)
 }
 
 void Parse::setReturn(const string& functionReturn)
+{
+
+}
+
+Parse::~Parse() 
 {
 
 }
