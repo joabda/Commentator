@@ -23,15 +23,18 @@ int languageChoice()
 
 bool verifyPath(string userInput)
 {
-    if(userInput[0] == '\'')
-        cout << Directory::validatePath(userInput);
-    return false;
+    bool exists = false;
+    if(userInput[0] != '\'')
+        exists = Directory::validatePath(userInput);
+    else
+        exists = !system("cd " + userInput);
+    return exists;
 }
 
 string getSourcePath()
 {
     string userInput = "";
-    while(verifyPath(userInput))
+    while(!verifyPath(userInput))
     {
         cout << "Enter your project's path" << endl;
         getline(cin, userInput);
@@ -41,8 +44,6 @@ string getSourcePath()
 
 int main(int argc, char *argv[])
 {
-    getSourcePath();
-
     int language = languageChoice();
     Header headerSettings;
 
