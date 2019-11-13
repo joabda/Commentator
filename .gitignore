@@ -33,3 +33,6 @@
 
 # Tests
 test/*
+
+#IDE configurations
+.vscode/*

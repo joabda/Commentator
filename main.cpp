@@ -27,7 +27,7 @@ bool verifyPath(string userInput)
     if(userInput[0] != '\'')
         exists = Directory::validatePath(userInput);
     else
-        exists = !system("cd " + userInput);
+        exists = !system(string("cd " + userInput).c_str());
     return exists;
 }
 
@@ -59,6 +59,10 @@ int main(int argc, char *argv[])
     }
     Directory projectDir(getSourcePath(), parser.getExtensions());
 
-
+    for(pair<string, string> element: projectDir.getFiles())
+    {
+        cout << "Commenting: " << element.first << endl;
+        parser.generateDocumentation(element.second, headerSettings);
+    }
     return 0;
 }

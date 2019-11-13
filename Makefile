@@ -22,7 +22,7 @@ main.o: main.cpp Header.h Parse.h ParseCpp.h ParseJava.h Directory.h
 Header.o: Header.cpp Header.h
 	$(CC) $(CXXFLAGS) -o $@ -c $<
 
-Parse.o: Parse.cpp Parse.h
+Parse.o: Parse.cpp Parse.h Header.h
 	$(CC) $(CXXFLAGS) -o $@ -c $<
 
 ParceCpp.o: ParceCpp.cpp ParceCpp.h Parce.h
@@ -33,8 +33,6 @@ ParceJava.o: ParceJava.cpp ParceJava.h Parce.h
 
 Directory.o: Directory.cpp Directory.h
 	$(CC) $(CXXFLAGS) -o $@ -c $<
-#Network.o: Network.cpp Network.h Host.h Algorithm.h DataBase.h Compare.h LinuxNotification.h
-#	$(CC) $(CXXFLAGS) -o $@ -c $<
 
 #LinuxNotification.o: LinuxNotification.cpp LinuxNotification.h Host.h
 #	$(CC) $(CXXFLAGS) -o $@ -c $<

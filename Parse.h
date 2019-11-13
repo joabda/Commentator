@@ -2,13 +2,16 @@
 
 #include <string>
 #include <vector>
+#include <fstream>
+#include <iostream>
+#include "Header.h"
 using namespace std;
 
 class Parse 
 {
 public:
     Parse();
-    void setFile(const string& fileName);
+    void generateDocumentation(const string& file, const Header& header);
     virtual vector<string> getExtensions() const { return {}; }
     virtual ~Parse() {}
 
