@@ -13,11 +13,14 @@ CC= g++-8
 
 all: $(EXEC)
 
-$(EXEC): main.o Header.o Parse.o ParseCpp.o ParseJava.o Directory.o
+$(EXEC): main.o Menu.o Header.o Parse.o ParseCpp.o ParseJava.o Directory.o 
 	$(CC) -o $@ $^ $(CXXFLAGS)
 
-main.o: main.cpp Header.h Parse.h ParseCpp.h ParseJava.h Directory.h
+main.o: main.cpp Menu.h Header.h Parse.h ParseCpp.h ParseJava.h Directory.h 
 	$(CC) $(CXXFLAGS) -o $@ -c $< 
+
+Menu.o: Menu.cpp Menu.h
+	$(CC) $(CXXFLAGS) -o $@ -c $<
 
 Header.o: Header.cpp Header.h
 	$(CC) $(CXXFLAGS) -o $@ -c $<
