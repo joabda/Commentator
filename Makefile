@@ -45,9 +45,9 @@ LinuxNotification.o: LinuxNotification.cpp LinuxNotification.h Directory.h
 clean:
 	rm *.o && rm $(EXEC)
 
-# Instruction to clean the log file containing error message
-cleanLog:
-	rm logFile.txt
+# # Instruction to clean the log file containing error message
+# cleanLog:
+# 	rm logFile.txt
 	
 # Instruction to check for memory leaks with valgrind
 debug-memory: $(EXEC)

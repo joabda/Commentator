@@ -25,7 +25,6 @@ int main(int argc, char *argv[])
             parser = ParseJava();
             break;
     }
-    cout << typeid(parser).name() << endl; // TEST
 
     Directory projectDir(Menu::getSourcePath(), parser.getExtensions());
 
