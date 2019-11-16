@@ -20,7 +20,7 @@ void Directory::findFilesInsideDirectory(const fs::path& currentPath)
     }
 }
 
-string Directory::extractName(string path) const
+string Directory::extractName(string path)
 {
     int lastPosition = 0;
     unsigned position = path.find('/');

@@ -14,6 +14,7 @@ public:
     Directory(const string& source, const vector<string>& extensions);
     map<string, string> getFiles() const;
     static bool validatePath(const string& paths);
+    static string extractName(string path);
 
 private:
     string source_;
@@ -23,5 +24,5 @@ private:
 
     bool validateExtension(const fs::path& currentEntry) const;
     void findFilesInsideDirectory(const fs::path& currentPath);
-    string extractName(string path) const;
+    
 };
