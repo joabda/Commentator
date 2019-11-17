@@ -8,13 +8,20 @@ Parse::Parse()
 void Parse::generateDocumentation(const string& file, const Header& header)
 {
     string signature;
-    fstream sourceFile(file, ios::in | ios::out);
+    ifstream sourceFile(file);
+    ofstream commented(file + ".txt");
+    string line;
+
+
+    // WORK TO DO HERE
+
     if(sourceFile.is_open())
     {
-        sourceFile.seekp(0, ios::beg);
-        sourceFile << header.getText();
+        commented << header.getText();
         while(!ws(sourceFile).eof())
         {
+            getline(sourceFile, line);
+            commented << line << "\n";
             goToNextFunction();
             getline(sourceFile, signature);
         }

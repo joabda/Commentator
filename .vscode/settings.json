@@ -6,6 +6,8 @@
         "filesystem": "cpp",
         "*.tcc": "cpp",
         "typeindex": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "new": "cpp",
+        "iosfwd": "cpp"
     }
 }
