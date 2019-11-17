@@ -24,7 +24,7 @@ string Directory::extractName(string path)
 {
     int lastPosition = 0;
     unsigned position = path.find('/');
-    while(position != string::npos)
+    while(position != string::npos && position < path.length())
     {
         lastPosition = position;
         path = path.substr(lastPosition + 1);
@@ -35,7 +35,7 @@ string Directory::extractName(string path)
 
 bool Directory::validateExtension(const fs::path& currentEntry) const
 {
-    for(auto currentExtension : extensions_)
+    for(const auto& currentExtension : extensions_)
         if(currentEntry == currentExtension)
             return true;
     return false;

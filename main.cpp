@@ -15,18 +15,18 @@ int main(int argc, char *argv[])
     int language = Menu::getLanguage();
     Header headerSettings;
 
-    Parse parser = Parse();
+    unique_ptr<Parse> parser(new Parse());
     switch(language)
     {
         case 1: 
-            parser = ParseCpp();
+            parser.reset(new ParseCpp());
             break;
         case 2: 
-            parser = ParseJava();
+            parser.reset(new ParseJava());
             break;
     }
 
-    Directory projectDir(Menu::getSourcePath(), parser.getExtensions());
+    Directory projectDir(Menu::getSourcePath(), parser->getExtensions());
 
     // TEST
     cout << "Current Directory contains: " << endl;
@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
     for(pair<string, string> element: projectDir.getFiles())
     {
         cout << "Commenting: " << element.first << endl;
-        parser.generateDocumentation(element.second, headerSettings);
+        parser->generateDocumentation(element.second, headerSettings);
     }
     return 0;
 }
