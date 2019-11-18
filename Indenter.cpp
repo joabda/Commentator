@@ -88,8 +88,58 @@ void source(const string& fileName)
 	writeInFile("temp.txt", indents, hold, bracketCount);
 }
 
+void header(const string& fileName)
+{
+	ifstream sourceFile(fileName);
+	vector<string> hold = readFile(sourceFile);
+	int endline = hold.size();
+	vector<int> bracketCount = initializeEmpty(endline, 0);
+
+	int current, length;
+	bool shouldIndent, previousClosed = true;
+	for(int count = 0; count < endline; count++)
+	{
+		length = hold[count].length();
+		for(int charPosition = 0; charPosition <= length; charPosition++)
+		{
+			shouldIndent = hold[count][charPosition] == ':';
+			if(previousClosed)
+			{
+				if(hold[count][charPosition] == '{' || shouldIndent)
+				{
+					current = count;
+					if(shouldIndent)
+						previousClosed = false;
+					while(current < endline)
+						bracketCount[++current]++;
+				}
+				else
+					if(hold[count][charPosition] == '}')
+						bracketCount[count] = 0;
+				
+			}
+			else
+				if(shouldIndent)
+				{
+					current = count;
+					while(current < endline)
+						bracketCount[current++]--;
+					if(shouldIndent)
+					{
+						current = count;
+						previousClosed = true;
+						while(current < endline)
+							bracketCount[++current]++;
+					}
+				}
+		}
+	}
+    vector<string> indents = initializeEmpty(endline, string(""));
+	writeInFile("temp222.txt", indents, hold, bracketCount);
+}
+
 
 int main()
 {
-    source("hello.cpp");
+    header("hello1.txt");
 }
