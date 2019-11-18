@@ -1,16 +1,11 @@
-#include <string>
-#include <fstream>
-#include <memory>
-#include <vector>
+#include "Indenter.h"
 
-using namespace std;
-
-void writeInFile(const string& fileName, vector<string>& indents, const vector<string>& hold, 
+void Indenter::writeInFile(const string& fileName, vector<string>& indents, const vector<string>& hold, 
 		vector<int>& bracketCount)
 {
 	ofstream commented(fileName);
 	int length;
-	for(int currentLineNumber = 0, count = 0; currentLineNumber < hold.size(); currentLineNumber++)
+	for(unsigned currentLineNumber = 0, count = 0; currentLineNumber < hold.size(); currentLineNumber++)
 	{
 		while((hold[currentLineNumber])[count] == '\t')
 			count++;
@@ -27,14 +22,14 @@ void writeInFile(const string& fileName, vector<string>& indents, const vector<s
             {
                 commented << indents[currentLineNumber];
                 length = hold[currentLineNumber].length();
-                for(int charPosition = 0; charPosition < (length - count); charPosition++)
+                for(unsigned charPosition = 0; charPosition < (length - count); charPosition++)
                     commented << hold[currentLineNumber][charPosition + count];
                 commented << endl;
             }
 	}
 }
 
-vector<string> readFile(istream& sourceFile)
+vector<string> Indenter::readFile(istream& sourceFile)
 {
 	vector<string> lineContainer;
 	int count = 0;
@@ -49,7 +44,7 @@ vector<string> readFile(istream& sourceFile)
 }
 
 template<typename T>
-vector<T> initializeEmpty(const int& numberOfElementsNeeded, const T& initValue)
+vector<T> Indenter::initializeEmpty(const int& numberOfElementsNeeded, const T& initValue)
 {
 	vector<T> bracketCount;
 	for(int i = 0; i < numberOfElementsNeeded; i++)
@@ -57,7 +52,7 @@ vector<T> initializeEmpty(const int& numberOfElementsNeeded, const T& initValue)
 	return bracketCount;
 }
 
-void source(const string& fileName)	
+void Indenter::source(const string& fileName)	
 {
 	ifstream sourceFile(fileName);
 	vector<string> hold = readFile(sourceFile);
@@ -88,7 +83,7 @@ void source(const string& fileName)
 	writeInFile("temp.txt", indents, hold, bracketCount);
 }
 
-void header(const string& fileName)
+void Indenter::header(const string& fileName)
 {
 	ifstream sourceFile(fileName);
 	vector<string> hold = readFile(sourceFile);
@@ -136,10 +131,4 @@ void header(const string& fileName)
 	}
     vector<string> indents = initializeEmpty(endline, string(""));
 	writeInFile("temp222.txt", indents, hold, bracketCount);
-}
-
-
-int main()
-{
-    header("hello1.txt");
 }

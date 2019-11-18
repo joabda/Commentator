@@ -8,6 +8,8 @@
         "typeindex": "cpp",
         "typeinfo": "cpp",
         "new": "cpp",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "memory": "cpp",
+        "fstream": "cpp"
     }
 }

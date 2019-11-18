@@ -8,6 +8,7 @@
 #include "ParseJava.h"   
 #include "Directory.h"
 #include "Menu.h"
+#include "Indenter.h"
 using namespace std;
 
 int main(int argc, char *argv[])
