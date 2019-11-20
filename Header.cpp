@@ -39,7 +39,7 @@ string Header::getText() const
 {
    return 
    "/* "
-    "* This file is part of" + project_ + ".\n"
+    "* This file is part of " + project_ + ".\n"
     "*\n"
     "* This product includes software developed by " + company_ + "\n"
     "* This product is owned by " + owner_ + " under the " + license_ + "\n"

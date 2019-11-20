@@ -1,9 +1,8 @@
 #include "Indenter.h"
 
-void Indenter::writeInFile(const string& fileName, vector<string>& indents, const vector<string>& hold, 
+void Indenter::writeInFile(ostream& commented, vector<string>& indents, const vector<string>& hold, 
 		vector<int>& bracketCount)
 {
-	ofstream commented(fileName);
 	int length;
 	for(unsigned currentLineNumber = 0, count = 0; currentLineNumber < hold.size(); currentLineNumber++)
 	{
@@ -80,7 +79,39 @@ void Indenter::source(const string& fileName)
 		}
 	}
     vector<string> indents = initializeEmpty(endline, string(""));
-	writeInFile("temp.txt", indents, hold, bracketCount);
+	ofstream toComment(fileName);
+	if(toComment.is_open())
+		writeInFile(toComment, indents, hold, bracketCount);
+	else
+		cout << "Error, couldn't open " << fileName << " for indentation" << endl;
+}
+
+void Indenter::source(ostream& commented, const vector<string>& hold)
+{
+	int endline = hold.size();
+	vector<int> bracketCount = initializeEmpty(endline, 0);
+	int current = 0, length = 0;
+	for(int count = 0; count < endline; count++)
+	{
+		length = hold[count].length();
+		for(int charPosition = 0; charPosition <= length; charPosition++)
+		{
+			if(hold[count][charPosition] == '{')
+            {
+                current = count;
+                while(current < endline)
+                    bracketCount[++current]++;
+            }
+			if(hold[count][charPosition] == '}')
+			{
+				current = count;
+				while(current < endline)
+					bracketCount[current++]--;
+			}
+		}
+	}
+    vector<string> indents = initializeEmpty(endline, string(""));
+	writeInFile(commented, indents, hold, bracketCount);
 }
 
 void Indenter::header(const string& fileName)
@@ -130,5 +161,57 @@ void Indenter::header(const string& fileName)
 		}
 	}
     vector<string> indents = initializeEmpty(endline, string(""));
-	writeInFile("temp222.txt", indents, hold, bracketCount);
+	ofstream toComment(fileName);
+	if(toComment.is_open())
+		writeInFile(toComment, indents, hold, bracketCount);
+	else
+		cout << "Error, couldn't open " << fileName << " for indentation" << endl;
+}
+
+void Indenter::header(ostream& commented, const vector<string>& hold)
+{
+	int endline = hold.size();
+	vector<int> bracketCount = initializeEmpty(endline, 0);
+
+	int current, length;
+	bool shouldIndent, previousClosed = true;
+	for(int count = 0; count < endline; count++)
+	{
+		length = hold[count].length();
+		for(int charPosition = 0; charPosition <= length; charPosition++)
+		{
+			shouldIndent = hold[count][charPosition] == ':';
+			if(previousClosed)
+			{
+				if(hold[count][charPosition] == '{' || shouldIndent)
+				{
+					current = count;
+					if(shouldIndent)
+						previousClosed = false;
+					while(current < endline)
+						bracketCount[++current]++;
+				}
+				else
+					if(hold[count][charPosition] == '}')
+						bracketCount[count] = 0;
+				
+			}
+			else
+				if(shouldIndent)
+				{
+					current = count;
+					while(current < endline)
+						bracketCount[current++]--;
+					if(shouldIndent)
+					{
+						current = count;
+						previousClosed = true;
+						while(current < endline)
+							bracketCount[++current]++;
+					}
+				}
+		}
+	}
+    vector<string> indents = initializeEmpty(endline, string(""));
+	writeInFile(commented, indents, hold, bracketCount);
 }

@@ -9,6 +9,7 @@
 #include "Directory.h"
 #include "Menu.h"
 #include "Indenter.h"
+#include "Tester.h"
 using namespace std;
 
 int main(int argc, char *argv[])
@@ -27,13 +28,10 @@ int main(int argc, char *argv[])
             break;
     }
 
+    if(system("cd commented"))
+        system("mkdir commented");
     Directory projectDir(Menu::getSourcePath(), parser->getExtensions());
-
-    // TEST
-    cout << "Current Directory contains: " << endl;
-    for(pair<string, string> element: projectDir.getFiles())
-        cout << "   " << element.first << endl;
-    //
+    Tester::printFilesInDir(projectDir.getFiles());
 
 
     for(pair<string, string> element: projectDir.getFiles())

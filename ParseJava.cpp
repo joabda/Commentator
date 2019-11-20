@@ -5,12 +5,18 @@ ParseJava::ParseJava()
 
 }
 
-void ParseJava::goToNextFunction()
-{
-    cout << "Java next funct" << endl;
-}
-
 vector<string> ParseJava::getExtensions() const
 {
     return {".java"};
+}
+
+
+string ParseJava::goToNextFunction(istream& currentFile, vector<string>& fileLines)
+{
+    
+}
+
+void ParseJava::documentFunction(const string& function)
+{
+        
 }

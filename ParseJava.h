@@ -8,8 +8,10 @@ class ParseJava : public Parse
 {
 public:
     ParseJava();
-    void goToNextFunction() override;
     vector<string> getExtensions() const override;
-
     ~ParseJava() {}
+
+protected:
+    string goToNextFunction(istream& currentFile, vector<string>& fileLines) override;
+    void documentFunction(const string& function) override;
 };
