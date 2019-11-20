@@ -2,7 +2,7 @@
 
 Parse::Parse()
 {
-
+    return_ = "void";
 }
 
 bool Parse::contains(const vector<string>& functions, const string& aFunction)

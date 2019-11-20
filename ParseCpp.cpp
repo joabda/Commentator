@@ -48,7 +48,11 @@ void ParseCpp::documentFunction(const string& function)
     reset();
         // RETURN
     int end = function.find(" ");
-    return_ = function.substr(0, end);
+    if(end < function.find("::"))
+        return_ = function.substr(0, end);
+    else
+        return_ = "void" ;
+
 
         // PARAMETERS
     int start = function.find("(");

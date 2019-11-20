@@ -13,7 +13,7 @@ vector<string> ParseJava::getExtensions() const
 
 string ParseJava::goToNextFunction(istream& currentFile, vector<string>& fileLines)
 {
-    
+    return "";
 }
 
 void ParseJava::documentFunction(const string& function)

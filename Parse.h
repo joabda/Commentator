@@ -25,7 +25,7 @@ protected:
     string fileName_;
     string type_;
 
-    virtual string goToNextFunction(istream& currentFile, vector<string>& fileLines) {}
+    virtual string goToNextFunction(istream& currentFile, vector<string>& fileLines) { return ""; }
     bool contains(const vector<string>& functions, const string& aFunction);
     virtual void documentFunction(const string& function) {}
     void reset();
