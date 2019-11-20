@@ -29,9 +29,9 @@ string ParseCpp::goToNextFunction(istream& currentFile, vector<string>& fileLine
     return "";
 }
 
-int findLastSpace(const string& line, const int& comma)
+int findLastSpace(const string& line, const unsigned& comma)
 {
-    int position = 0, temp = 0;
+    unsigned position = 0, temp = 0;
     while(temp != string::npos)
     {
         temp = line.find(" ", position + 1);
