@@ -22,7 +22,7 @@ main.o: main.cpp Menu.h Header.h Parse.h ParseCpp.h ParseJava.h Directory.h Inde
 Menu.o: Menu.cpp Menu.h
 	$(CC) $(CXXFLAGS) -o $@ -c $<
 
-Header.o: Header.cpp Header.h
+Header.o: Header.cpp Header.h Menu.h
 	$(CC) $(CXXFLAGS) -o $@ -c $<
 
 Parse.o: Parse.cpp Parse.h Header.h

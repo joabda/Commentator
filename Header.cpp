@@ -3,17 +3,17 @@
 Header::Header()
 {
     cout << "Company's name: ";
-    cin >> company_;
+    getline(cin, company_);
     cout << endl;
 
     cout << "Project's name: ";
-    cin >> project_;
+    getline(cin, project_);
     cout << endl;
     
     copyrights();
 
     cout << "Code's Owner: ";
-    cin >> owner_;
+    getline(cin, owner_);
     cout << endl;
 
 }
@@ -21,6 +21,7 @@ Header::Header()
 void Header::copyrights()
 {
     int licenseChoice = 0;
+    string input;
     const string availableLicenses[4] = {"MIT License", "Appache License 2.0",
         "GNU General Public License v3.0", "Unlicensed"};
 
@@ -30,7 +31,8 @@ void Header::copyrights()
         cout << "2 - " << availableLicenses[1] << endl;
         cout << "3 - " << availableLicenses[2] << endl;
         cout << "4 - " << availableLicenses[3] << endl;
-        cin >> licenseChoice;
+        getline(cin, input);
+        licenseChoice = Menu::isDigit(input);
     }
     license_ = availableLicenses[licenseChoice - 1];
 }

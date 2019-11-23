@@ -3,13 +3,24 @@
 int Menu::getLanguage()
 {
     int choice = 0;
+    string input;
     while(choice < 1 || choice > 2)
     {
         cout << "Pleaser enter what language you are using: " << endl;
         cout << "1- C++" << endl;
-        cin >> choice;
+        getline(cin, input);
+        choice = isDigit(input);
     }
     return choice;
+}
+
+int Menu::isDigit(const string& input)
+{
+    string::const_iterator iterator = input.begin();
+    for (; iterator != input.end() && isdigit(*iterator); ++iterator);
+    if(!input.empty() && iterator == input.end())
+        return stoi(input);
+    return 0;
 }
 
 bool Menu::verifyPath(string userInput)
