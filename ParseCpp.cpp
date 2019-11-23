@@ -45,14 +45,14 @@ int findLastSpace(const string& line, const unsigned& comma)
 
 void ParseCpp::documentFunction(const string& function)
 {
+    cout << function << endl;
     reset();
         // RETURN
-    int end = function.find(" ");
-    if(end < function.find("::"))
+    int end = findLastSpace(function, function.find("::"));
+    if(end < function.find("::") && end > 1)
         return_ = function.substr(0, end);
     else
-        return_ = "void" ;
-
+        return_ = "void";
 
         // PARAMETERS
     int start = function.find("(");
@@ -61,22 +61,30 @@ void ParseCpp::documentFunction(const string& function)
     {
         string line = function.substr(start + 1, end - start - 1);
         end = line.find(","); 
-        while(end != string::npos)
+        while( true )
         {
             end = line.find(","); 
             if(end != string::npos)
             {
                 start = findLastSpace(line, end);
+                cout << "Param is " << line.substr(start , end - start) << endl;
                 parameters_.push_back(line.substr(start , end - start));
+                line = line.substr(end + 1);
             }
             else
             {
+                cout << "Line " << line << endl;
                 end = line.length();
+                if(end == 0)
+                    break;
                 start = findLastSpace(line, end);
+                cout << "Start is " << start << " and end is " << end << endl;  
+                cout << "Param is " << line.substr(start , end - start) << endl;
                 parameters_.push_back(line.substr(start , end - start));
-                break;
+                break;            
             }
-            line = line.substr(end + 1);
+            
         }
+
     }
 }

@@ -57,8 +57,11 @@ string Parse::generateFunctionDocumentation() const
         doc += " *@param " + param + "\n";
     if(!parameters_.empty())
         doc += " *\n";
-    if(return_ != "void")
+    if(return_.substr(0,4) != "void")
+    {
         doc += " *@returns a " + return_ + "\n";
+        cout << "Returns " << return_ << endl;
+    }
     doc += " */\n";
     return doc;
 }
