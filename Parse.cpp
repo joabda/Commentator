@@ -21,6 +21,8 @@ void Parse::generateDocumentation(const string& file, const Header& header)
     vector<string> lines;
     vector<string> functions;
 
+    cout << "IN FILE " << file << endl;
+
     if(sourceFile.is_open())
     {
         while(sourceFile.good())
@@ -31,10 +33,11 @@ void Parse::generateDocumentation(const string& file, const Header& header)
             if(functionLine != "")
                 functions.push_back(functionLine);
         }
-        for(string element: functions)
+        cout << "------------------FUNCTION OF FILE ------------------------" << endl;
+        for(const string& element: functions)
             cout << element << endl;
-
-        ofstream commented("commented/" + file);
+        cout << "---------------THE END ----------------------------" << endl;
+        ofstream commented("test/commented/" + Static::extractName(file) );
         commented << header.getText();
         for(const string& element: lines)
         {
@@ -58,10 +61,7 @@ string Parse::generateFunctionDocumentation() const
     if(!parameters_.empty())
         doc += " *\n";
     if(return_.substr(0,4) != "void")
-    {
         doc += " *@returns a " + return_ + "\n";
-        cout << "Returns " << return_ << endl;
-    }
     doc += " */\n";
     return doc;
 }

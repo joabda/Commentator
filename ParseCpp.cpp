@@ -1,10 +1,5 @@
 #include "ParseCpp.h"
 
-ParseCpp::ParseCpp()
-{
-
-}   
-
 vector<string> ParseCpp::getExtensions() const
 {
     return {".cpp", ".h", ".hpp"};
@@ -28,9 +23,9 @@ string ParseCpp::goToNextFunction(istream& currentFile, vector<string>& fileLine
         line = lineNext;
         getline(currentFile, lineNext);
         fileLines.push_back(lineNext);
-        if(line.find("::") != string::npos && line.find("(") != string::npos
+        if( line.find("::") != string::npos && line.find("(") != string::npos
                 && (line.find(")") != string::npos || lineNext.find(")") != string::npos) 
-                && line.find("=") == string::npos)
+                && line.find("=") == string::npos )
             return line;
     } 
     return "";

@@ -8,7 +8,7 @@ using namespace std;
 class ParseCpp : public Parse
 {
 public:
-    ParseCpp();
+    ParseCpp() {}
     vector<string> getExtensions() const override;
     ~ParseCpp() {}
 

@@ -5,6 +5,7 @@
 #include <fstream>
 #include <iostream>
 #include "Header.h"
+#include "Static.h"
 using namespace std;
 
 class Parse 
@@ -28,5 +29,5 @@ protected:
     bool contains(const vector<string>& functions, const string& aFunction);
     virtual void documentFunction(const string& function) {}
     void reset();
-    virtual bool isSource(const string& fileName) const {}
+    virtual bool isSource(const string& fileName) const { return false; }
 };

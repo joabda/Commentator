@@ -32,7 +32,7 @@ void Header::copyrights()
         cout << "3 - " << availableLicenses[2] << endl;
         cout << "4 - " << availableLicenses[3] << endl;
         getline(cin, input);
-        licenseChoice = isDigit(input);
+        licenseChoice = Static::isDigit(input);
     }
     license_ = availableLicenses[licenseChoice - 1];
 }
@@ -50,13 +50,4 @@ string Header::getText() const
     "*\n"
     "* You should have received a copy of the License along with this program.\n"
     "*/\n";
-}
-
-int Header::isDigit(const string& input)
-{
-    string::const_iterator iterator = input.begin();
-    for (; iterator != input.end() && isdigit(*iterator); ++iterator);
-    if(!input.empty() && iterator == input.end())
-        return stoi(input);
-    return 0;
 }

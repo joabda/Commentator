@@ -27,8 +27,8 @@ int main(int argc, char *argv[])
             break;
     }
 
-    if(system("cd commented"))
-        system("mkdir commented");
+    if(system("cd test/commented"))
+        system("mkdir test/commented");
     Directory projectDir(Menu::getSourcePath(), parser->getExtensions());
 
 

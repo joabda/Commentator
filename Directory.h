@@ -4,6 +4,7 @@
 #include <string>
 #include <filesystem>
 #include <map>
+#include "Static.h"
 
 using namespace std;
 namespace fs = std::filesystem;
@@ -13,8 +14,7 @@ class Directory
 public: 
     Directory(const string& source, const vector<string>& extensions);
     map<string, string> getFiles() const;
-    static bool validatePath(const string& paths);
-    static string extractName(string path);
+    static bool validatePath(const string& path);
 
 private:
     string source_;

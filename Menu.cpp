@@ -8,8 +8,9 @@ int Menu::getLanguage()
     {
         cout << "Pleaser enter what language you are using: " << endl;
         cout << "1- C++" << endl;
+        cout << "2- Java" << endl;
         getline(cin, input);
-        choice = Header::isDigit(input);
+        choice = Static::isDigit(input);
     }
     return choice;
 }

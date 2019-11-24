@@ -20,7 +20,7 @@ string LinuxNotifyManager::addFileInfos(fs::directory_entry currentEntry) const
 	@return 	void
 */
 {
-    return QUOTE + "<b>" + Directory::extractName(currentEntry.path()) + "</b>" +
+    return QUOTE + "<b>" + Static::extractName(currentEntry.path()) + "</b>" +
         " has been commented from " + currentEntry.path().c_str() + QUOTE + " ";
 }
 
