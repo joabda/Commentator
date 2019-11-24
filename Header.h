@@ -2,7 +2,6 @@
 
 #include <string>
 #include <iostream>
-#include "Menu.h"
 
 using namespace std;
 
@@ -11,6 +10,7 @@ class Header
 public:
     Header();
     string getText() const;
+    static int isDigit(const string& input);
 
 private:
     string company_;
