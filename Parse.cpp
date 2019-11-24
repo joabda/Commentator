@@ -38,7 +38,7 @@ void Parse::generateDocumentation(const string& file, const Header& header)
         commented << header.getText();
         for(const string& element: lines)
         {
-            if(contains(functions, element))
+            if(isSource(file) && contains(functions, element))
             {
                 documentFunction(element);
                 commented << generateFunctionDocumentation();

@@ -10,6 +10,13 @@ vector<string> ParseCpp::getExtensions() const
     return {".cpp", ".h", ".hpp"};
 }
 
+bool ParseCpp::isSource(const string& fileName) const
+{
+    if(fileName.find(".cpp") != string::npos)
+        return true;
+    return false;
+}
+
 string ParseCpp::goToNextFunction(istream& currentFile, vector<string>& fileLines)
 {
     string line;
