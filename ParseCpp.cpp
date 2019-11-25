@@ -26,7 +26,8 @@ string ParseCpp::goToNextFunction(istream& currentFile, vector<string>& fileLine
         fileLines.push_back(lineNext);
         parenthese = line.find("(");
         doublePoints = line.find("::");
-        if(parenthese != string::npos && doublePoints != string::npos && doublePoints < parenthese)
+        if(parenthese != string::npos && doublePoints != string::npos && doublePoints < parenthese
+                && !isComment(line))
         {
             equalSign = line.find("=");
             if(equalSign != string::npos && equalSign < parenthese)

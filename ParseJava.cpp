@@ -24,7 +24,8 @@ string ParseJava::goToNextFunction(istream& currentFile, vector<string>& fileLin
         line = lineNext;
         getline(currentFile, lineNext);
         fileLines.push_back(lineNext);
-        if(line.find("(") != string::npos && containsAccessibility(line))
+        if(line.find("(") != string::npos && containsAccessibility(line)
+                && !isComment(line))
         {
             if(line.find(")") != string::npos)
                 return line;
@@ -37,12 +38,14 @@ string ParseJava::goToNextFunction(istream& currentFile, vector<string>& fileLin
 
 bool ParseJava::containsAccessibility(const string& line)
 {
-    if(line.find("public") || line.find("private") || line.find("protected"))
+    if(line.find("public") != string::npos 
+            || line.find("private") != string::npos
+            || line.find("protected") != string::npos)
         return true;
     return false;
 }
 
 void ParseJava::findReturn(const string& function)
 {
-        
+    reset();
 }

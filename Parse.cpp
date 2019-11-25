@@ -77,6 +77,7 @@ void Parse::documentFunction(const string& function)
     {
         string line = function.substr(start + 1, end - start - 1);
         end = line.find(","); 
+        cout << function << endl;
         while( true )
         {
             end = line.find(","); 
@@ -84,6 +85,7 @@ void Parse::documentFunction(const string& function)
             {
                 start = Static::findLastSpace(line, end);
                 parameters_.push_back(line.substr(start , end - start));
+                cout << "Param " << line.substr(start , end - start) << endl;
                 line = line.substr(end + 1);
             }
             else
@@ -91,8 +93,10 @@ void Parse::documentFunction(const string& function)
                 end = line.length();
                 if(end == 0)
                     break;
-                start = Static::findLastSpace(line, end);
+                start = Static::findLastSpace(line, end - 2);
+                cout << "Start " << start << " End " << end << endl;
                 parameters_.push_back(line.substr(start , end - start));
+                cout << "Param " << line.substr(start , end - start) << endl;
                 break;            
             }  
         }
@@ -107,5 +111,14 @@ void Parse::reset()
     return_ = "";
     fileName_ = "";
     type_ = "";
+}
+
+bool Parse::isComment(const string& line)
+{
+    int parentheses = line.find("(");
+    int comment = line.find("//");
+    if(parentheses != string::npos && comment != string::npos && comment < parentheses)
+        return true;
+    return false;
 }
     

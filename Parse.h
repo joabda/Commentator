@@ -30,6 +30,7 @@ protected:
     void reset();
     virtual void findReturn(const string& function) {}
     virtual bool isSource(const string& fileName) const { return false; }
+    bool isComment(const string& line);
 
 private:
     void documentFunction(const string& function);
