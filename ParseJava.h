@@ -13,7 +13,7 @@ public:
 
 protected:
     string goToNextFunction(istream& currentFile, vector<string>& fileLines) override;
-    void documentFunction(const string& function) override;
+    void findReturn(const string& function) override;
     bool isSource(const string& fileName) const override;
 
 private:

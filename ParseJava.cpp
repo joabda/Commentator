@@ -42,7 +42,7 @@ bool ParseJava::containsAccessibility(const string& line)
     return false;
 }
 
-void ParseJava::documentFunction(const string& function)
+void ParseJava::findReturn(const string& function)
 {
         
 }

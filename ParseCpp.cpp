@@ -18,69 +18,34 @@ string ParseCpp::goToNextFunction(istream& currentFile, vector<string>& fileLine
     string lineNext;
     getline(currentFile, lineNext);
     fileLines.push_back(lineNext);
+    int parenthese, doublePoints, equalSign;
     while(currentFile.good())
     {
         line = lineNext;
         getline(currentFile, lineNext);
         fileLines.push_back(lineNext);
-        if( line.find("::") != string::npos && line.find("(") != string::npos
-                && (line.find(")") != string::npos || lineNext.find(")") != string::npos) 
-                && line.find("=") == string::npos )
-            return line;
+        parenthese = line.find("(");
+        doublePoints = line.find("::");
+        if(parenthese != string::npos && doublePoints != string::npos && doublePoints < parenthese)
+        {
+            equalSign = line.find("=");
+            if(equalSign != string::npos && equalSign < parenthese)
+                continue;
+            if(line.find(")") != string::npos)
+                return line;
+            if(lineNext.find(")") != string::npos)
+                return line + lineNext;
+        }
     } 
     return "";
 }
 
-int findLastSpace(const string& line, const unsigned& comma)
+void ParseCpp::findReturn(const string& function)
 {
-    unsigned position = 0, temp = 0;
-    while(temp != string::npos)
-    {
-        temp = line.find(" ", position + 1);
-        if(temp < comma && temp >= 0)
-            position = temp;
-        else
-            break;
-    }
-    return position + 1;
-}
-
-void ParseCpp::documentFunction(const string& function)
-{
-    cout << function << endl;
     reset();
-        // RETURN
-    int end = findLastSpace(function, function.find("::"));
+    int end = Static::findLastSpace(function, function.find("::"));
     if(end < function.find("::") && end > 1)
         return_ = function.substr(0, end);
     else
         return_ = "void";
-
-        // PARAMETERS
-    int start = function.find("(");
-    end = function.find(")");
-    if(start != string::npos && end != string::npos)
-    {
-        string line = function.substr(start + 1, end - start - 1);
-        end = line.find(","); 
-        while( true )
-        {
-            end = line.find(","); 
-            if(end != string::npos)
-            {
-                start = findLastSpace(line, end);
-                parameters_.push_back(line.substr(start , end - start));
-                line = line.substr(end + 1);
-            }
-            else
-            {
-                end = line.length();
-                if(end == 0)
-                    break;
-                start = findLastSpace(line, end);
-                parameters_.push_back(line.substr(start , end - start));
-                break;            
-            }  
-        }
-    }
 }

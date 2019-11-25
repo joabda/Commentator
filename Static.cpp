@@ -22,3 +22,18 @@ int Static::isDigit(const string& input)
         return stoi(input);
     return 0;
 }
+
+
+int Static::findLastSpace(const string& line, unsigned comma)
+{
+    unsigned position = 0, temp = 0;
+    while(temp != string::npos)
+    {
+        temp = line.find(" ", position + 1);
+        if(temp < comma && temp >= 0)
+            position = temp;
+        else
+            break;
+    }
+    return position + 1;
+}

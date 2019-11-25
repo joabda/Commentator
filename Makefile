@@ -53,7 +53,7 @@ clean:
 
 # Instruction to clean the commented folder containing commented files
 cleanCommented:
-	rm -rf commented
+	rm -rf commented && rm -rf test/commented
 	
 # Instruction to check for memory leaks with valgrind
 debug-memory: $(EXEC)

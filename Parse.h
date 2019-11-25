@@ -27,7 +27,10 @@ protected:
 
     virtual string goToNextFunction(istream& currentFile, vector<string>& fileLines) { return ""; }
     bool contains(const vector<string>& functions, const string& aFunction);
-    virtual void documentFunction(const string& function) {}
     void reset();
+    virtual void findReturn(const string& function) {}
     virtual bool isSource(const string& fileName) const { return false; }
+
+private:
+    void documentFunction(const string& function);
 };
