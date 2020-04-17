@@ -28,8 +28,6 @@ bool Menu::verifyPath(string userInput)
 string Menu::getSourcePath()
 {
     string userInput = "";
-    cin.clear();
-    cin.ignore(INT32_MAX, '\n');
     while(!verifyPath(userInput))
     {
         cout << "Enter your project's path" << endl;

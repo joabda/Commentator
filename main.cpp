@@ -26,11 +26,12 @@ int main(int argc, char *argv[])
             parser.reset(new ParseJava());
             break;
     }
-
     if(system("cd test/commented"))
+    {
         system("mkdir test/commented");
+        system("cd test/commented");
+    }
     Directory projectDir(Menu::getSourcePath(), parser->getExtensions());
-
 
     for(pair<string, string> element: projectDir.getFiles())
     {
