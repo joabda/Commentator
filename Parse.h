@@ -22,6 +22,7 @@ protected:
     vector<string> parameters_;
     vector<string> templateParameters_;
     string return_;
+    string functionName_;
     string fileName_;
     string type_;
 
@@ -31,6 +32,7 @@ protected:
     virtual void findReturn(const string& function) {}
     virtual bool isSource(const string& fileName) const { return false; }
     bool isComment(const string& line);
+    string findNameMeaning() const;
 
 private:
     void documentFunction(const string& function);

@@ -21,8 +21,6 @@ void Parse::generateDocumentation(const string& file, const Header& header)
     vector<string> lines;
     vector<string> functions;
 
-    cout << "IN FILE " << file << endl;
-
     if(sourceFile.is_open())
     {
         while(sourceFile.good())
@@ -33,10 +31,6 @@ void Parse::generateDocumentation(const string& file, const Header& header)
             if(functionLine != "")
                 functions.push_back(functionLine);
         }
-        cout << "------------------FUNCTION OF FILE ------------------------" << endl;
-        for(const string& element: functions)
-            cout << element << endl;
-        cout << "---------------THE END ----------------------------" << endl;
         ofstream commented("test/commented/" + Static::extractName(file) );
         commented << header.getText();
         for(const string& element: lines)
@@ -53,9 +47,37 @@ void Parse::generateDocumentation(const string& file, const Header& header)
         cout << "File " << file << " is not open" << endl;
 }
 
+string Parse::findNameMeaning() const 
+{
+    string doc = "/*\n *";
+    const int initialLength = doc.length();
+    int index = functionName_.find("get");
+    if(index != string::npos)
+    {
+        string attribute = functionName_.substr(index + 3);
+        attribute[0] = tolower(attribute[0]);
+        doc += "Getter function for " + attribute; // 3 length of "get"
+    }
+    else 
+    {
+        index = functionName_.find("set");
+        if(index != string::npos)
+        {
+            string attribute = functionName_.substr(index + 3);
+            attribute[0] = tolower(attribute[0]);
+            doc += "Setter function for " + attribute; // 3 length of "set"
+        }
+    }
+    if(doc.length() == initialLength)
+        doc += "Function to " + Static::parseLowerCamelCaseWord(functionName_);
+    doc += " \n *\n";
+    return doc;
+}
+
 string Parse::generateFunctionDocumentation() const
 {      
-    string doc =  "/* Function to \n *\n" ;
+    string doc = findNameMeaning();
+
     for(const string& param: parameters_)
         doc += " *@param " + param + "\n";
     if(!parameters_.empty())
@@ -68,16 +90,25 @@ string Parse::generateFunctionDocumentation() const
 
 void Parse::documentFunction(const string& function)
 {
+    // Return type
     findReturn(function);
 
+    // Name
+    int end = function.find("(");
+    int start;
+    if(end != string::npos)
+    {
+        start = function.find("::");
+        functionName_ = function.substr(start + 2, end - start - 2); //  2 length of "::"
+    }
+
     // PARAMETERS
-    int start = function.find("(");
-    int end = function.find(")");
+    start = function.find("(");
+    end = function.find(")");
     if(start != string::npos && end != string::npos)
     {
         string line = function.substr(start + 1, end - start - 1);
         end = line.find(","); 
-        cout << function << endl;
         while( true )
         {
             end = line.find(","); 
@@ -85,7 +116,6 @@ void Parse::documentFunction(const string& function)
             {
                 start = Static::findLastSpace(line, end);
                 parameters_.push_back(line.substr(start , end - start));
-                cout << "Param " << line.substr(start , end - start) << endl;
                 line = line.substr(end + 1);
             }
             else
@@ -94,9 +124,7 @@ void Parse::documentFunction(const string& function)
                 if(end == 0)
                     break;
                 start = Static::findLastSpace(line, end - 2);
-                cout << "Start " << start << " End " << end << endl;
                 parameters_.push_back(line.substr(start , end - start));
-                cout << "Param " << line.substr(start , end - start) << endl;
                 break;            
             }  
         }

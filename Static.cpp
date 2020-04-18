@@ -37,3 +37,46 @@ int Static::findLastSpace(const string& line, unsigned comma)
     }
     return position + 1;
 }
+
+int Static::getNextUpperCaseIndex(const string& line)
+{
+	for(int i = 0; i < line.length(); ++i)
+		if(isupper(line[i]))
+			return i;
+	return string::npos;	
+}
+
+void Static::toLower(string& mixed)
+{
+    transform(
+        mixed.begin(), mixed.end(), mixed.begin(),
+        []( unsigned char c ) { 
+            return tolower(c); 
+        }
+    );
+}
+
+bool isDelimiter(char c)
+{
+    auto const isAllowedInName = isalnum(c) || c == ':';
+    return !isAllowedInName;
+}
+
+string Static::parseLowerCamelCaseWord(const string& line)
+{
+    auto beginWord = find_if_not(begin(line), end(line), isDelimiter);
+    auto words = vector<string>{};
+    while (beginWord != end(line))
+    {
+        auto endWord = find_if(next(beginWord), end(line), [](char c){ return isDelimiter(c) || isupper(c); });
+        words.emplace_back(beginWord, endWord);
+        beginWord = find_if_not(endWord, end(line), isDelimiter);
+    }
+    string toReturn = "";
+    for(auto& word: words)
+    {
+        word[0] = tolower(word[0]);
+        toReturn += word + " ";
+    }
+    return toReturn;
+}

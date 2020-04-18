@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <pthread.h>
 
 #include "Header.h"
 #include "Parse.h"
@@ -9,6 +10,7 @@
 #include "Directory.h"
 #include "Menu.h"
 #include "Indenter.h"
+#include "ThreadManager.h"
 using namespace std;
 
 int main(int argc, char *argv[])
@@ -33,10 +35,8 @@ int main(int argc, char *argv[])
     }
     Directory projectDir(Menu::getSourcePath(), parser->getExtensions());
 
-    for(pair<string, string> element: projectDir.getFiles())
-    {
-        cout << "Commenting: " << element.first << endl;
+    for(auto& element: projectDir.getFiles())
         parser->generateDocumentation(element.second, headerSettings);
-    }
+    // ThreadManager threads(parser.get(), projectDir.getFiles(), headerSettings);
     return 0;
 }
