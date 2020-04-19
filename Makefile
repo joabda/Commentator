@@ -5,7 +5,7 @@
 ##################################################
 
 EXEC = Commentator
-CXXFLAGS = --std=c++17 -lstdc++fs -O0 -Wall
+CXXFLAGS = --std=c++17 -lstdc++fs -O2 -Wall
 DEBUG = no
 CC= g++-8
 
@@ -13,7 +13,7 @@ CC= g++-8
 
 all: $(EXEC)
 
-$(EXEC): main.o Directory.o Header.o Menu.o LinuxNotification.o Parse.o ParseCpp.o ParseJava.o Static.o #ThreadManager.o Indenter.o 
+$(EXEC): main.o Directory.o Header.o Menu.o Parse.o ParseCpp.o ParseJava.o Static.o #LinuxNotification.o ThreadManager.o Indenter.o 
 	$(CC) -o $@ $^ $(CXXFLAGS) 
 	# -L/usr/lib -lpthread
 
@@ -29,8 +29,8 @@ Header.o: Header.cpp Header.h Static.h
 # Indenter.o: Indenter.cpp Indenter.h
 # 	$(CC) $(CXXFLAGS) -o $@ -c $
 
-LinuxNotification.o: LinuxNotification.cpp LinuxNotification.h Static.h
-	$(CC) $(CXXFLAGS) -o $@ -c $<
+#LinuxNotification.o: LinuxNotification.cpp LinuxNotification.h Static.h
+#	$(CC) $(CXXFLAGS) -o $@ -c $<
 
 Menu.o: Menu.cpp Menu.h Directory.h Header.h
 	$(CC) $(CXXFLAGS) -o $@ -c $<
