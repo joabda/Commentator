@@ -90,3 +90,12 @@ bool Static::isVowel(char letter)
             return true;
     return false;
 }
+
+int Static::countSpaces(const string& input)
+{
+   int numberOfSpaces = 0;
+    for(auto iterator = input.begin(); iterator != input.end(); ++iterator)
+        if (*iterator == ' ')
+            numberOfSpaces++;
+   return numberOfSpaces;
+}

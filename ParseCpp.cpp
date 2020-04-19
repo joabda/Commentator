@@ -18,7 +18,7 @@ string ParseCpp::goToNextFunction(istream& currentFile, vector<string>& fileLine
     string lineNext;
     getline(currentFile, lineNext);
     fileLines.push_back(lineNext);
-    int parenthese, doublePoints, equalSign;
+    unsigned parenthese, doublePoints, equalSign;
     while(currentFile.good())
     {
         line = lineNext;
@@ -26,11 +26,14 @@ string ParseCpp::goToNextFunction(istream& currentFile, vector<string>& fileLine
         fileLines.push_back(lineNext);
         parenthese = line.find("(");
         doublePoints = line.find("::");
-        if(parenthese != int(string::npos) && doublePoints != int(string::npos) && doublePoints < parenthese
+        if(parenthese != string::npos && doublePoints != string::npos && doublePoints < parenthese
                 && !isComment(line))
         {
             equalSign = line.find("=");
-            if(equalSign != int(string::npos) && equalSign < parenthese)
+            if(equalSign != string::npos && equalSign < parenthese)
+                continue;
+            findReturn(line);
+            if(return_ == "Error")
                 continue;
             if(line.find(")") != string::npos)
                 return line;
@@ -44,9 +47,22 @@ string ParseCpp::goToNextFunction(istream& currentFile, vector<string>& fileLine
 void ParseCpp::findReturn(const string& function)
 {
     reset();
-    unsigned end = Static::findLastSpace(function, function.find("::"));
-    if(end < function.find("::") && end > 1)
-        return_ = function.substr(0, end);
+    unsigned doublePoints = function.find("::");
+    unsigned end = Static::findLastSpace(function, doublePoints);
+    if(end < doublePoints && end > 1)
+    {
+        const string toReturn = function.substr(0, end);
+        if(Static::countSpaces(toReturn) < 2)
+            return_ = toReturn;
+        else 
+            return_ = "Error";
+    }
     else
-        return_ = "void";
+    {
+        const unsigned parenthese = function.find("(");
+        if(function.substr(0, doublePoints) == function.substr(doublePoints + 2, parenthese - (doublePoints + 2)))
+            return_ = "void";
+        else
+            return_ = "Error";
+    }
 }

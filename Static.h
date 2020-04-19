@@ -15,4 +15,5 @@ public:
     static void toLower(string& mixed);
     static string parseLowerCamelCaseWord(const string& line);
     static bool isVowel(char letter);
+    static int countSpaces(const string& input);
 };
