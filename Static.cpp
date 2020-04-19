@@ -67,7 +67,7 @@ bool isDelimiter(char c)
 string Static::parseLowerCamelCaseWord(const string& line)
 {
     auto beginWord = find_if_not(begin(line), end(line), isDelimiter);
-    auto words = vector<string>{};
+    vector<string> words = vector<string>{};
     while (beginWord != end(line))
     {
         auto endWord = find_if(next(beginWord), end(line), [](char c){ return isDelimiter(c) || isupper(c); });
@@ -75,7 +75,7 @@ string Static::parseLowerCamelCaseWord(const string& line)
         beginWord = find_if_not(endWord, end(line), isDelimiter);
     }
     string toReturn = "";
-    for(auto& word: words)
+    for(string& word: words)
     {
         word[0] = tolower(word[0]);
         toReturn += word + " ";
@@ -85,8 +85,8 @@ string Static::parseLowerCamelCaseWord(const string& line)
 
 bool Static::isVowel(char letter)
 {
-    for(unsigned i = 0; i < 5; ++i)
-        if(letter == vowels_[i])
+    for(const char& vowel: vowels_)
+        if(letter == vowel)
             return true;
     return false;
 }

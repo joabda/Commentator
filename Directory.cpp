@@ -13,9 +13,8 @@ Directory::Directory(const string& source, const vector<string>& extensions)
     source_ = source;
     directories_ = {source_};
     extensions_ = extensions;
-    for(unsigned index = 0; index < directories_.size(); ++index)
-        findFilesInsideDirectory(directories_[index]);
-
+    for(auto&& element: directories_) // Old unsigned index = 0; index < directories_.size(); ++index
+        findFilesInsideDirectory(element);
     print(files_);
 }
 

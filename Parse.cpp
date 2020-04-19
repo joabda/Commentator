@@ -107,7 +107,7 @@ void Parse::documentFunction(const string& function)
         functionName_ = function.substr(start + 2, end - start - 2); //  2 length of "::"
     }
 
-    // PARAMETERS
+    // Parameters
     start = function.find("(");
     end = function.find(")");
     if(start != int(string::npos) && end != int(string::npos))
