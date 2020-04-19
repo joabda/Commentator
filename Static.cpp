@@ -1,5 +1,7 @@
 #include "Static.h"
 
+static const char vowels_[5] = {'a', 'e', 'i', 'o', 'u'};
+
 string Static::extractName(string path) 
 {
     int lastPosition = 0;
@@ -79,4 +81,12 @@ string Static::parseLowerCamelCaseWord(const string& line)
         toReturn += word + " ";
     }
     return toReturn;
+}
+
+bool Static::isVowel(char letter)
+{
+    for(unsigned i = 0; i < 5; ++i)
+        if(letter == vowels_[i])
+            return true;
+    return false;
 }

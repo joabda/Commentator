@@ -14,4 +14,5 @@ public:
     static unsigned getNextUpperCaseIndex(const string& line);
     static void toLower(string& mixed);
     static string parseLowerCamelCaseWord(const string& line);
+    static bool isVowel(char letter);
 };

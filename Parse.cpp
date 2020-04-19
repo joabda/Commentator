@@ -83,7 +83,12 @@ string Parse::generateFunctionDocumentation() const
     if(!parameters_.empty())
         doc += " *\n";
     if(return_.substr(0,4) != "void")
-        doc += " *@returns a " + return_ + "\n";
+    {
+        doc += " *@returns a";
+        if(Static::isVowel(return_[0]))
+            doc += "n";
+        doc += " " + return_ + "\n";
+    }
     doc += " */\n";
     return doc;
 }
