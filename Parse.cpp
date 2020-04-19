@@ -31,7 +31,7 @@ void Parse::generateDocumentation(const string& file, const Header& header)
             if(functionLine != "")
                 functions.push_back(functionLine);
         }
-        ofstream commented("test/commented/" + Static::extractName(file) );
+        ofstream commented("commented/" + Static::extractName(file) );
         commented << header.getText();
         for(const string& element: lines)
         {
@@ -50,9 +50,9 @@ void Parse::generateDocumentation(const string& file, const Header& header)
 string Parse::findNameMeaning() const 
 {
     string doc = "/*\n *";
-    const int initialLength = doc.length();
+    const unsigned initialLength = doc.length();
     int index = functionName_.find("get");
-    if(index != string::npos)
+    if(index != int(string::npos))
     {
         string attribute = functionName_.substr(index + 3);
         attribute[0] = tolower(attribute[0]);
@@ -61,7 +61,7 @@ string Parse::findNameMeaning() const
     else 
     {
         index = functionName_.find("set");
-        if(index != string::npos)
+        if(index != int(string::npos))
         {
             string attribute = functionName_.substr(index + 3);
             attribute[0] = tolower(attribute[0]);
@@ -96,7 +96,7 @@ void Parse::documentFunction(const string& function)
     // Name
     int end = function.find("(");
     int start;
-    if(end != string::npos)
+    if(end != int(string::npos))
     {
         start = function.find("::");
         functionName_ = function.substr(start + 2, end - start - 2); //  2 length of "::"
@@ -105,14 +105,14 @@ void Parse::documentFunction(const string& function)
     // PARAMETERS
     start = function.find("(");
     end = function.find(")");
-    if(start != string::npos && end != string::npos)
+    if(start != int(string::npos) && end != int(string::npos))
     {
         string line = function.substr(start + 1, end - start - 1);
         end = line.find(","); 
         while( true )
         {
             end = line.find(","); 
-            if(end != string::npos)
+            if(end != int(string::npos))
             {
                 start = Static::findLastSpace(line, end);
                 parameters_.push_back(line.substr(start , end - start));
@@ -145,7 +145,7 @@ bool Parse::isComment(const string& line)
 {
     int parentheses = line.find("(");
     int comment = line.find("//");
-    if(parentheses != string::npos && comment != string::npos && comment < parentheses)
+    if(parentheses != int(string::npos) && comment != int(string::npos) && comment < parentheses)
         return true;
     return false;
 }

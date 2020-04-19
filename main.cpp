@@ -28,10 +28,10 @@ int main(int argc, char *argv[])
             parser.reset(new ParseJava());
             break;
     }
-    if(system("cd test/commented"))
+    if(system("cd commented"))
     {
-        system("mkdir test/commented");
-        system("cd test/commented");
+        system("mkdir commented");
+        system("cd commented");
     }
     Directory projectDir(Menu::getSourcePath(), parser->getExtensions());
 

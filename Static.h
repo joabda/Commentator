@@ -11,7 +11,7 @@ public:
     static string extractName(string path);
     static int isDigit(const string& input);
     static int findLastSpace(const string& line, unsigned comma);
-    static int getNextUpperCaseIndex(const string& line);
+    static unsigned getNextUpperCaseIndex(const string& line);
     static void toLower(string& mixed);
     static string parseLowerCamelCaseWord(const string& line);
 };

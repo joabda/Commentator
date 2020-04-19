@@ -26,11 +26,11 @@ string ParseCpp::goToNextFunction(istream& currentFile, vector<string>& fileLine
         fileLines.push_back(lineNext);
         parenthese = line.find("(");
         doublePoints = line.find("::");
-        if(parenthese != string::npos && doublePoints != string::npos && doublePoints < parenthese
+        if(parenthese != int(string::npos) && doublePoints != int(string::npos) && doublePoints < parenthese
                 && !isComment(line))
         {
             equalSign = line.find("=");
-            if(equalSign != string::npos && equalSign < parenthese)
+            if(equalSign != int(string::npos) && equalSign < parenthese)
                 continue;
             if(line.find(")") != string::npos)
                 return line;
@@ -44,7 +44,7 @@ string ParseCpp::goToNextFunction(istream& currentFile, vector<string>& fileLine
 void ParseCpp::findReturn(const string& function)
 {
     reset();
-    int end = Static::findLastSpace(function, function.find("::"));
+    unsigned end = Static::findLastSpace(function, function.find("::"));
     if(end < function.find("::") && end > 1)
         return_ = function.substr(0, end);
     else

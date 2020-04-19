@@ -38,7 +38,7 @@ string ParseJava::goToNextFunction(istream& currentFile, vector<string>& fileLin
 
 bool ParseJava::containsAccessibility(const string& line)
 {
-    if(line.find("public") != string::npos 
+    if(line.find("public") != string::npos
             || line.find("private") != string::npos
             || line.find("protected") != string::npos)
         return true;

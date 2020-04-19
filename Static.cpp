@@ -38,9 +38,9 @@ int Static::findLastSpace(const string& line, unsigned comma)
     return position + 1;
 }
 
-int Static::getNextUpperCaseIndex(const string& line)
+unsigned Static::getNextUpperCaseIndex(const string& line)
 {
-	for(int i = 0; i < line.length(); ++i)
+	for(unsigned i = 0; i < line.length(); ++i)
 		if(isupper(line[i]))
 			return i;
 	return string::npos;	
