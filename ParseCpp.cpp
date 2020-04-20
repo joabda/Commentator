@@ -71,7 +71,7 @@ void ParseCpp::findReturn(const string& function)
     {
         const unsigned parenthese = function.find("(");
         if(function.substr(0, doublePoints) == function.substr(doublePoints + 2, parenthese - (doublePoints + 2)))
-            return_ = "void";
+            return_ = "Constructor";
         else
             return_ = "Error";
     }
