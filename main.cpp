@@ -6,7 +6,8 @@
 #include "Header.h"
 #include "Parse.h"
 #include "ParseCpp.h"
-#include "ParseJava.h"   
+#include "ParseJava.h"  
+#include "ParseTs.h" 
 #include "Directory.h"
 #include "Menu.h"
 #include "Indenter.h"
@@ -26,6 +27,9 @@ int main(int argc, char *argv[])
             break;
         case 2: 
             parser.reset(new ParseJava());
+            break;
+        case 3: 
+            parser.reset(new ParseTypescript());
             break;
     }
     if(system("cd commented"))

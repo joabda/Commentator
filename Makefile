@@ -13,7 +13,7 @@ CC= g++-8
 
 all: $(EXEC)
 
-$(EXEC): main.o Directory.o Header.o Menu.o Parse.o ParseCpp.o ParseJava.o Static.o #LinuxNotification.o ThreadManager.o Indenter.o 
+$(EXEC): main.o Directory.o Header.o Menu.o Parse.o ParseCpp.o ParseJava.o ParseTs.o Static.o #LinuxNotification.o ThreadManager.o Indenter.o 
 	$(CC) -o $@ $^ $(CXXFLAGS) 
 	# -L/usr/lib -lpthread
 
@@ -42,6 +42,9 @@ ParceCpp.o: ParceCpp.cpp ParceCpp.h Parse.h
 	$(CC) $(CXXFLAGS) -o $@ -c $<
 
 ParceJava.o: ParceJava.cpp ParceJava.h Parse.h
+	$(CC) $(CXXFLAGS) -o $@ -c $<
+
+ParseTs.o: ParseTs.cpp ParseTs.h Parse.h
 	$(CC) $(CXXFLAGS) -o $@ -c $<
 
 Static.o: Static.cpp Static.h

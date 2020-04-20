@@ -4,11 +4,12 @@ int Menu::getLanguage()
 {
     int choice = 0;
     string input;
-    while(choice < 1 || choice > 2)
+    while(choice < 1 || choice > 3)
     {
         cout << "Pleaser enter what language you are using: " << endl;
         cout << "1- C++" << endl;
         cout << "2- Java" << endl;
+        cout << "3- Typescript" << endl;
         getline(cin, input);
         choice = Static::isDigit(input);
     }
