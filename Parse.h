@@ -13,7 +13,7 @@ class Parse
 public:
     Parse();
     void generateDocumentation(const string& file, const Header& header);
-    string generateFunctionDocumentation() const;
+    string generateFunctionDocumentation();
     virtual vector<string> getExtensions() const { return {}; }
     virtual ~Parse() {}
 
@@ -30,9 +30,11 @@ protected:
     bool contains(const vector<string>& functions, const string& aFunction);
     void reset();
     virtual void findReturn(const string& function) {}
+    virtual void findName(const string& function) {}
     virtual bool isSource(const string& fileName) const { return false; }
     bool isComment(const string& line);
-    string findNameMeaning() const;
+    void isGetterOrSetter(string& doc) const;
+    virtual string findNameMeaning() {}
 
 private:
     void documentFunction(const string& function);

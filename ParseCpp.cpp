@@ -44,9 +44,19 @@ string ParseCpp::goToNextFunction(istream& currentFile, vector<string>& fileLine
     return "";
 }
 
+string ParseCpp::findNameMeaning() 
+{
+    string doc = "/*\n *";
+    const unsigned initialLength = doc.length();
+    isGetterOrSetter(doc);
+    if(doc.length() == initialLength)
+        doc += "Function to " + Static::parseLowerCamelCaseWord(functionName_);
+    doc += " \n *\n";
+    return doc;
+}
+
 void ParseCpp::findReturn(const string& function)
 {
-    reset();
     unsigned doublePoints = function.find("::");
     unsigned end = Static::findLastSpace(function, doublePoints);
     if(end < doublePoints && end > 1)
@@ -64,5 +74,16 @@ void ParseCpp::findReturn(const string& function)
             return_ = "void";
         else
             return_ = "Error";
+    }
+}
+
+void ParseCpp::findName(const string& function)
+{
+    int end = function.find("(");
+    int start;
+    if(end != int(string::npos))
+    {
+        start = function.find("::");
+        functionName_ = function.substr(start + 2, end - start - 2); //  2 length of "::"
     }
 }

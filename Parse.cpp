@@ -47,10 +47,8 @@ void Parse::generateDocumentation(const string& file, const Header& header)
         cout << "File " << file << " is not open" << endl;
 }
 
-string Parse::findNameMeaning() const 
+void Parse::isGetterOrSetter(string& doc) const
 {
-    string doc = "/*\n *";
-    const unsigned initialLength = doc.length();
     int index = functionName_.find("get");
     if(index != int(string::npos))
     {
@@ -68,15 +66,22 @@ string Parse::findNameMeaning() const
             doc += "Setter function for " + attribute; // 3 length of "set"
         }
     }
-    if(doc.length() == initialLength)
-        doc += "Function to " + Static::parseLowerCamelCaseWord(functionName_);
-    doc += " \n *\n";
-    return doc;
 }
 
-string Parse::generateFunctionDocumentation() const
+string Parse::generateFunctionDocumentation()
 {      
+    cout << functionName_ << endl;
     string doc = findNameMeaning();
+    if(return_ == "Constructor")
+    {
+        doc = "/*\n *";
+        return_ = "void";
+        if(parameters_.size() > 0)
+            doc += "Constructor with parameters";
+        else
+            doc += "Default Constructor";
+        doc += " \n *\n";
+    }
 
     for(const string& param: parameters_)
         doc += " *@param " + param + "\n";
@@ -96,20 +101,15 @@ string Parse::generateFunctionDocumentation() const
 void Parse::documentFunction(const string& function)
 {
     // Return type
+    reset();
     findReturn(function);
 
     // Name
-    int end = function.find("(");
-    int start;
-    if(end != int(string::npos))
-    {
-        start = function.find("::");
-        functionName_ = function.substr(start + 2, end - start - 2); //  2 length of "::"
-    }
+    findName(function);
 
     // Parameters
-    start = function.find("(");
-    end = function.find(")");
+    int start = function.find("(");
+    int end = function.find(")");
     if(start != int(string::npos) && end != int(string::npos))
     {
         string line = function.substr(start + 1, end - start - 1);
